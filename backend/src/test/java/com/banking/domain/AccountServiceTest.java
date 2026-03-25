@@ -1,5 +1,6 @@
 package com.banking.domain;
 
+import com.banking.adapter.out.InMemoryAccountRepository;
 import com.banking.domain.model.Account;
 import com.banking.domain.port.in.AccountUseCase;
 import com.banking.domain.port.out.AccountRepository;

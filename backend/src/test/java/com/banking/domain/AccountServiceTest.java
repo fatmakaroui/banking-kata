@@ -43,8 +43,8 @@ class AccountServiceTest {
 
 
         assertThat(statement).contains("date       | amount   | balance");
-        assertThat(statement).contains("500.00");
-        assertThat(statement).contains("100.00");
-        assertThat(statement).contains("-200.00");
+        assertThat(statement).contains("500,00");
+        assertThat(statement).contains("100,00");
+        assertThat(statement).contains("-200,00");
     }
 }

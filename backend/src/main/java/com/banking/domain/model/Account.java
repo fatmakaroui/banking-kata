@@ -21,6 +21,22 @@ public class Account {
         addTransaction(amount.negate());
     }
 
+    public String printStatement(){
+        StringBuilder statement= new StringBuilder();
+        statement.append("date       | amount   | balance\n");
+        List<Transaction> reversed = new ArrayList<>(transactions);
+        Collections.reverse(reversed);
+
+        for (Transaction transaction : reversed) {
+            statement.append(String.format("%s | %8.2f | %8.2f%n",
+                    transaction.date(),
+                    transaction.amount(),
+                    transaction.balance()
+            ));
+        }
+        return statement.toString();
+    }
+
     private void addTransaction(BigDecimal amount) {
         transactions.add(new Transaction(LocalDate.now(), amount, balance));
     }

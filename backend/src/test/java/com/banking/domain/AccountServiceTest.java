@@ -47,4 +47,19 @@ class AccountServiceTest {
         assertThat(statement).contains("100,00");
         assertThat(statement).contains("-200,00");
     }
+
+    @Test
+    void depositViaService_shouldIncreaseBalance() {
+
+        AccountRepository repository = new InMemoryAccountRepository();
+        AccountUseCase service = new AccountService(repository);
+
+
+        service.deposit("account-1", new BigDecimal("1000"));
+
+
+        Account account = repository.findById("account-1");
+        assertThat(account.getBalance())
+                .isEqualByComparingTo(new BigDecimal("1000"));
+    }
 }

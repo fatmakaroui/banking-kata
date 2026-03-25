@@ -30,4 +30,21 @@ class AccountServiceTest {
         assertThat(account.getBalance())
                 .isEqualByComparingTo(new BigDecimal("500"));
     }
+
+    @Test
+    void printStatement_shouldReturnFormattedTransactions() {
+        Account account = new Account();
+        account.deposit(new BigDecimal("500"));
+        account.deposit(new BigDecimal("100"));
+        account.withdraw(new BigDecimal("200"));
+
+
+        String statement = account.printStatement();
+
+
+        assertThat(statement).contains("date       | amount   | balance");
+        assertThat(statement).contains("500.00");
+        assertThat(statement).contains("100.00");
+        assertThat(statement).contains("-200.00");
+    }
 }

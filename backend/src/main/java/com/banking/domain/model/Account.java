@@ -13,12 +13,16 @@ public class Account {
 
     public void deposit(BigDecimal amount) {
         this.balance = this.balance.add(amount);
-        transactions.add(new Transaction(LocalDate.now(), amount, balance));
+        addTransaction(amount);
     }
 
     public void withdraw(BigDecimal amount) {
         this.balance = this.balance.subtract(amount);
-        transactions.add(new Transaction(LocalDate.now(), amount.negate(), balance));
+        addTransaction(amount.negate());
+    }
+
+    private void addTransaction(BigDecimal amount) {
+        transactions.add(new Transaction(LocalDate.now(), amount, balance));
     }
 
     public BigDecimal getBalance() {

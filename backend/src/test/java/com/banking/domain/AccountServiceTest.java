@@ -1,6 +1,10 @@
 package com.banking.domain;
 
+import com.banking.domain.model.Account;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AccountServiceTest {
@@ -9,10 +13,10 @@ class AccountServiceTest {
     void deposit_shouldIncreaseBalance() {
         Account account = new Account();
 
-        account.deposit(new java.math.BigDecimal("1000"));
+        account.deposit(new BigDecimal("1000"));
 
 
         assertThat(account.getBalance())
-                .isEqualByComparingTo(new java.math.BigDecimal("1000"));
+                .isEqualByComparingTo(new BigDecimal("1000"));
     }
 }

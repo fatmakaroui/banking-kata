@@ -16,6 +16,11 @@ public class Account {
         transactions.add(new Transaction(LocalDate.now(), amount, balance));
     }
 
+    public void withdraw(BigDecimal amount) {
+        this.balance = this.balance.subtract(amount);
+        transactions.add(new Transaction(LocalDate.now(), amount.negate(), balance));
+    }
+
     public BigDecimal getBalance() {
         return balance;
     }

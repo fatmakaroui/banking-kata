@@ -2,6 +2,7 @@ package com.banking.domain;
 
 import com.banking.domain.model.Account;
 import com.banking.domain.port.in.AccountUseCase;
+import com.banking.domain.port.out.AccountRepository;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

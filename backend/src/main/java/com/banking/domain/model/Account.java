@@ -8,6 +8,9 @@ import java.util.List;
 
 public class Account {
 
+    private static final String STATEMENT_HEADER = "date       | amount   | balance\n";
+    private static final String TRANSACTION_FORMAT = "%s | %8.2f | %8.2f%n";
+
     private BigDecimal balance = BigDecimal.ZERO;
     private final List<Transaction> transactions = new ArrayList<>();
 
@@ -23,12 +26,12 @@ public class Account {
 
     public String printStatement(){
         StringBuilder statement= new StringBuilder();
-        statement.append("date       | amount   | balance\n");
+        statement.append(STATEMENT_HEADER);
         List<Transaction> reversed = new ArrayList<>(transactions);
         Collections.reverse(reversed);
 
         for (Transaction transaction : reversed) {
-            statement.append(String.format("%s | %8.2f | %8.2f%n",
+            statement.append(String.format(TRANSACTION_FORMAT,
                     transaction.date(),
                     transaction.amount(),
                     transaction.balance()

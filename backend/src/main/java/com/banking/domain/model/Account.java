@@ -10,6 +10,7 @@ public class Account {
 
     private static final String STATEMENT_HEADER = "date       | amount   | balance\n";
     private static final String TRANSACTION_FORMAT = "%s | %8.2f | %8.2f%n";
+    private static final String INVALID_AMOUNT_MESSAGE = "Amount must be positive";
 
     private BigDecimal balance = BigDecimal.ZERO;
     private final List<Transaction> transactions = new ArrayList<>();
@@ -56,7 +57,7 @@ public class Account {
 
     private void validateAmount(BigDecimal amount) {
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Amount must be positive");
+            throw new IllegalArgumentException(INVALID_AMOUNT_MESSAGE);
         }
     }
 }

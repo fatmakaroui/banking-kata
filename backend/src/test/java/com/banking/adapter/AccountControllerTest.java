@@ -1,5 +1,6 @@
 package com.banking.adapter;
 
+import com.banking.adapter.in.AccountController;
 import com.banking.domain.port.in.AccountUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

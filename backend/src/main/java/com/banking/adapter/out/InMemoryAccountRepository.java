@@ -14,4 +14,9 @@ public class InMemoryAccountRepository implements AccountRepository {
     public Account findById(String accountId) {
         return store.getOrDefault(accountId, new Account());
     }
+
+    @Override
+    public void save(String accountId, Account account) {
+        store.put(accountId, account);
+    }
 }

@@ -17,16 +17,14 @@ describe('AccountComponent', () => {
     mockAccountService = {
       deposit: vi.fn(),
       withdraw: vi.fn(),
-      getStatement: vi.fn().mockReturnValue(
-        of('date       | amount   | balance\n2026-03-25 | 1000.00 | 1000.00')
-      )
+      getStatement: vi
+        .fn()
+        .mockReturnValue(of('date       | amount   | balance\n2026-03-25 | 1000.00 | 1000.00')),
     };
 
     await TestBed.configureTestingModule({
       imports: [AccountComponent],
-      providers: [
-        { provide: AccountService, useValue: mockAccountService }
-      ]
+      providers: [{ provide: AccountService, useValue: mockAccountService }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AccountComponent);
@@ -37,5 +35,14 @@ describe('AccountComponent', () => {
   it('should display statement on init', () => {
     expect(mockAccountService.getStatement).toHaveBeenCalledWith('account-1');
     expect(component.statement).toContain('date       | amount   | balance');
+  });
+
+  it('should call deposit when deposit button is clicked', () => {
+    component.amount = 1000;
+    mockAccountService.deposit.mockReturnValue(of(null));
+
+    component.deposit();
+
+    expect(mockAccountService.deposit).toHaveBeenCalledWith('account-1', 1000);
   });
 });

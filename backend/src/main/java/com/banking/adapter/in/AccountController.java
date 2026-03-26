@@ -20,4 +20,10 @@ public class AccountController {
                         @RequestParam BigDecimal amount) {
         accountUseCase.deposit(accountId, amount);
     }
+
+    @PostMapping("/{accountId}/withdraw")
+    public void withdraw(@PathVariable String accountId,
+                        @RequestParam BigDecimal amount) {
+        accountUseCase.withdraw(accountId, amount);
+    }
 }

@@ -33,4 +33,15 @@ describe('Account', () => {
     expect(req.request.method).toBe('POST');
     req.flush(null);
   });
+
+  it('should call POST /accounts/account-1/withdraw', () => {
+  service.withdraw('account-1', 1000).subscribe();
+
+  const req = httpMock.expectOne(
+    'http://localhost:8080/accounts/account-1/withdraw?amount=1000'
+  );
+  expect(req.request.method).toBe('POST');
+  req.flush(null);
+});
+
 });

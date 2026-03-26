@@ -27,4 +27,11 @@ export class Account {
     );
   }
 
+  getStatement(accountId: string): Observable<string> {
+    return this.http.get(
+      `${this.apiUrl}/${accountId}/statement`,
+      { responseType: 'text' }
+    );
+  }
+
 }

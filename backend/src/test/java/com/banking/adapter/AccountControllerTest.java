@@ -29,4 +29,13 @@ class AccountControllerTest {
 
         verify(accountUseCase).deposit("account-1", new java.math.BigDecimal("1000"));
     }
+
+    @Test
+    void withdraw_shouldReturn200() throws Exception {
+        mockMvc.perform(post("/accounts/account-1/withdraw")
+                        .param("amount", "500"))
+                .andExpect(status().isOk());
+
+        verify(accountUseCase).withdraw("account-1", new java.math.BigDecimal("500"));
+    }
 }

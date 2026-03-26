@@ -27,4 +27,8 @@ export class AccountComponent implements OnInit {
   deposit(): void {
     this.accountService.deposit(this.accountId, this.amount).subscribe(() => this.loadStatement());
   }
+
+  withdraw(): void {
+    this.accountService.withdraw(this.accountId, this.amount).subscribe(() => this.loadStatement());
+  }
 }

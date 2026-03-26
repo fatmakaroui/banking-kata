@@ -10,11 +10,7 @@ describe('Account', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        Account,
-        provideHttpClient(),
-        provideHttpClientTesting()
-      ]
+      providers: [Account, provideHttpClient(), provideHttpClientTesting()],
     });
     service = TestBed.inject(Account);
     httpMock = TestBed.inject(HttpTestingController);
@@ -27,21 +23,24 @@ describe('Account', () => {
   it('should call POST /accounts/account-1/deposit', () => {
     service.deposit('account-1', 1000).subscribe();
 
-    const req = httpMock.expectOne(
-      'http://localhost:8080/accounts/account-1/deposit?amount=1000'
-    );
+    const req = httpMock.expectOne('http://localhost:8080/accounts/account-1/deposit?amount=1000');
     expect(req.request.method).toBe('POST');
     req.flush(null);
   });
 
   it('should call POST /accounts/account-1/withdraw', () => {
-  service.withdraw('account-1', 1000).subscribe();
+    service.withdraw('account-1', 1000).subscribe();
 
-  const req = httpMock.expectOne(
-    'http://localhost:8080/accounts/account-1/withdraw?amount=1000'
-  );
-  expect(req.request.method).toBe('POST');
-  req.flush(null);
-});
+    const req = httpMock.expectOne('http://localhost:8080/accounts/account-1/withdraw?amount=1000');
+    expect(req.request.method).toBe('POST');
+    req.flush(null);
+  });
 
+  it('should call GET /accounts/account-1/statement', () => {
+    service.getStatement('account-1').subscribe();
+
+    const req = httpMock.expectOne('http://localhost:8080/accounts/account-1/statement');
+    expect(req.request.method).toBe('GET');
+    req.flush('date | amount | balance');
+  });
 });

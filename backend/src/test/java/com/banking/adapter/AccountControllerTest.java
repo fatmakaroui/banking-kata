@@ -8,9 +8,12 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+
+import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(AccountController.class)
 class AccountControllerTest {
@@ -37,5 +40,15 @@ class AccountControllerTest {
                 .andExpect(status().isOk());
 
         verify(accountUseCase).withdraw("account-1", new java.math.BigDecimal("500"));
+    }
+
+    @Test
+    void printStatement_shouldReturn200() throws Exception {
+        when(accountUseCase.printStatement("account-1"))
+                .thenReturn("date       | amount   | balance\n");
+
+        mockMvc.perform(get("/accounts/account-1/statement"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("date       | amount   | balance")));
     }
 }

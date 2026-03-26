@@ -26,4 +26,9 @@ public class AccountController {
                         @RequestParam BigDecimal amount) {
         accountUseCase.withdraw(accountId, amount);
     }
+
+    @GetMapping("/{accountId}/statement")
+    public String printStatement(@PathVariable String accountId) {
+        return accountUseCase.printStatement(accountId);
+    }
 }

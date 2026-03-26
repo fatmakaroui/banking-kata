@@ -18,4 +18,13 @@ export class Account {
       { params: { amount: amount.toString() } }
     );
   }
+
+  withdraw(accountId: string, amount: number): Observable<void> {
+    return this.http.post<void>(
+      `${this.apiUrl}/${accountId}/withdraw`,
+      null,
+      { params: { amount: amount.toString() } }
+    );
+  }
+
 }

@@ -34,11 +34,11 @@ describe('AccountComponent', () => {
 
   it('should display statement on init', () => {
     expect(mockAccountService.getStatement).toHaveBeenCalledWith('account-1');
-    expect(component.statement).toContain('date       | amount   | balance');
+    expect(component.statement()).toContain('date       | amount   | balance');
   });
 
   it('should call deposit when deposit button is clicked', () => {
-    component.amount = 1000;
+   component.amount.set(1000);
     mockAccountService.deposit.mockReturnValue(of(null));
 
     component.deposit();
@@ -47,7 +47,7 @@ describe('AccountComponent', () => {
   });
 
   it('should call withdraw when withdraw button is clicked', () => {
-  component.amount = 500;
+  component.amount.set(500);
   mockAccountService.withdraw.mockReturnValue(of(null));
 
   component.withdraw();

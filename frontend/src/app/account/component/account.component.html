@@ -1,1 +1,27 @@
-<p>account works!</p>
+<div class="banking-container">
+
+  <h1>Banking Kata</h1>
+
+  <!-- Deposit / Withdraw -->
+  <div class="actions">
+    <input
+      type="number"
+      [ngModel]="amount()"
+      (ngModelChange)="amount.set($event)"
+      placeholder="Enter amount"
+    />
+    <button class="btn-deposit" (click)="deposit()">Deposit</button>
+    <button class="btn-withdraw" (click)="withdraw()">Withdraw</button>
+  </div>
+
+  <!-- Relevé bancaire -->
+  <div class="statement">
+    <h2>Account Statement</h2>
+    @if (statement()) {
+      <pre>{{ statement() }}</pre>
+    } @else {
+      <p class="empty">No transactions yet.</p>
+    }
+  </div>
+
+</div>

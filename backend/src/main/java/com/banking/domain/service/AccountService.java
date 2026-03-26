@@ -16,21 +16,29 @@ public class AccountService implements AccountUseCase {
 
     @Override
     public void deposit(String accountId, BigDecimal amount) {
-        Account account = accountRepository.findById(accountId);
+        Account account = findAccount(accountId);
         account.deposit(amount);
-        accountRepository.save(accountId, account);
+        saveAccount(accountId, account);
     }
 
     @Override
     public void withdraw(String accountId, BigDecimal amount) {
-        Account account = accountRepository.findById(accountId);
+        Account account = findAccount(accountId);
         account.withdraw(amount);
-        accountRepository.save(accountId, account);
+        saveAccount(accountId, account);
     }
 
     @Override
     public String printStatement(String accountId) {
         Account account = accountRepository.findById(accountId);
         return account.printStatement();
+    }
+
+    private Account findAccount(String accountId) {
+        return accountRepository.findById(accountId);
+    }
+
+    private void saveAccount(String accountId, Account account) {
+        accountRepository.save(accountId, account);
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import java.math.BigDecimal;
+
 
 
 import static org.hamcrest.Matchers.containsString;
@@ -30,7 +32,7 @@ class AccountControllerTest {
                         .param("amount", "1000"))
                 .andExpect(status().isOk());
 
-        verify(accountUseCase).deposit("account-1", new java.math.BigDecimal("1000"));
+        verify(accountUseCase).deposit("account-1", new BigDecimal("1000"));
     }
 
     @Test
@@ -39,7 +41,7 @@ class AccountControllerTest {
                         .param("amount", "500"))
                 .andExpect(status().isOk());
 
-        verify(accountUseCase).withdraw("account-1", new java.math.BigDecimal("500"));
+        verify(accountUseCase).withdraw("account-1", new BigDecimal("500"));
     }
 
     @Test

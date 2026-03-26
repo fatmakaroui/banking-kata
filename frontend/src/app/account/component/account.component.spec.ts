@@ -1,22 +1,41 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AccountComponent } from './account.component';
+import { AccountService } from '../service/account.service';
+import { of } from 'rxjs';
+import { vi } from 'vitest';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
   let fixture: ComponentFixture<AccountComponent>;
+  let mockAccountService: {
+    deposit: ReturnType<typeof vi.fn>;
+    withdraw: ReturnType<typeof vi.fn>;
+    getStatement: ReturnType<typeof vi.fn>;
+  };
 
   beforeEach(async () => {
+    mockAccountService = {
+      deposit: vi.fn(),
+      withdraw: vi.fn(),
+      getStatement: vi.fn().mockReturnValue(
+        of('date       | amount   | balance\n2026-03-25 | 1000.00 | 1000.00')
+      )
+    };
+
     await TestBed.configureTestingModule({
       imports: [AccountComponent],
+      providers: [
+        { provide: AccountService, useValue: mockAccountService }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should display statement on init', () => {
+    expect(mockAccountService.getStatement).toHaveBeenCalledWith('account-1');
+    expect(component.statement).toContain('date       | amount   | balance');
   });
 });

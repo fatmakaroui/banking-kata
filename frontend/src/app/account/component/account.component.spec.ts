@@ -45,4 +45,13 @@ describe('AccountComponent', () => {
 
     expect(mockAccountService.deposit).toHaveBeenCalledWith('account-1', 1000);
   });
+
+  it('should call withdraw when withdraw button is clicked', () => {
+  component.amount = 500;
+  mockAccountService.withdraw.mockReturnValue(of(null));
+
+  component.withdraw();
+
+  expect(mockAccountService.withdraw).toHaveBeenCalledWith('account-1', 500);
+});
 });

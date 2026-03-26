@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/accounts")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
 
     private final AccountUseCase accountUseCase;

@@ -7,9 +7,11 @@ import com.banking.domain.port.out.AccountRepository;
 import com.banking.domain.service.AccountService;
 import org.junit.jupiter.api.Test;
 
+
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class AccountServiceTest {
 
@@ -66,4 +68,25 @@ class AccountServiceTest {
         assertThat(account.getBalance())
                 .isEqualByComparingTo(new BigDecimal("1000"));
     }
+
+    @Test
+    void deposit_withNegativeAmount_shouldThrowException() {
+
+        Account account = new Account();
+
+        assertThatThrownBy(() -> account.deposit(new BigDecimal("-100")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Amount must be positive");
+    }
+
+    @Test
+    void withdraw_withNegativeAmount_shouldThrowException() {
+
+        Account account = new Account();
+
+        assertThatThrownBy(() -> account.withdraw(new BigDecimal("-100")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Amount must be positive");
+    }
+
 }

@@ -2,17 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-import { Account } from './account';
+import { AccountService } from './account.service';
 
-describe('Account', () => {
-  let service: Account;
+describe('AccountService', () => {
+  let service: AccountService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [Account, provideHttpClient(), provideHttpClientTesting()],
+      providers: [AccountService, provideHttpClient(), provideHttpClientTesting()],
     });
-    service = TestBed.inject(Account);
+    service = TestBed.inject(AccountService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 

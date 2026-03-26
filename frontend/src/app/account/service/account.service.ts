@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class Account {
+export class AccountService {
 
   private readonly apiUrl = 'http://localhost:8080/accounts';
 
